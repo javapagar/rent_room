@@ -1,6 +1,6 @@
 import uuid
 import pytest
-from app.entities.models.room import Room
+from app.room.domain.models.room import Room
 
 @pytest.fixture
 def room_dict() ->dict:
