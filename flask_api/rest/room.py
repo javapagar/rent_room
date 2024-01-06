@@ -1,10 +1,13 @@
-from room.domain.models.room import Room
-from flask_api.app import create_app
-import pytest 
+import json
 
-@pytest.fixture
-def room_dict_list():
-    rooms = [
+from flask import Blueprint, Response
+
+from room.infraestructure.memory_reposiory import MemoryRepository
+from room.use_cases.room_list_getter import RoomListGetter
+
+blueprint = Blueprint("room",__name__)
+
+rooms = [
         {
             'uuid': 'd3b92e03-b078-4c90-90cd-dcbf59773082', 
             'price': 100, 
@@ -27,16 +30,15 @@ def room_dict_list():
             'lat': 37.89819060042842
         }
     ]
-    return rooms
-@pytest.fixture
-def room_list(room_dict_list):
-    return [Room(**room) for room in room_dict_list]
 
-@pytest.fixture
-def app():
-    app = create_app("testing")
+repo = MemoryRepository(rooms)
 
-    return app
-@pytest.fixture()
-def client(app):
-    return app.test_client()
+@blueprint.route("/rooms",methods=["GET"])
+def room_list():
+    result = RoomListGetter.get_all(repo)
+
+    return Response(
+        json.dumps(result),
+        mimetype="application/json",
+        status=200
+    )

@@ -1,6 +1,6 @@
 import pytest
 from unittest import mock
-from app.room.use_cases.room_list_getter import RoomListGetter
+from room.use_cases.room_list_getter import RoomListGetter
 
 
 def test_all_room_list(room_list):
