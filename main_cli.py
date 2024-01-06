@@ -1,5 +1,5 @@
-from app.room.infraestructure.memory_reposiory import MemoryRepository
-from app.room.use_cases.room_list_getter import RoomListGetter
+from room.infraestructure.memory_reposiory import MemoryRepository
+from room.use_cases.room_list_getter import RoomListGetter
 ROOMS = [
         {
             'uuid': 'd3b92e03-b078-4c90-90cd-dcbf59773082',
